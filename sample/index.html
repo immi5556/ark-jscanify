@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="https://docs.opencv.org/4.7.0/opencv.js" async></script>
+    <!-- warning: loading OpenCV can take some time. Load asynchronously -->
+    <script src="https://cdn.jsdelivr.net/gh/ColonelParrot/jscanify@master/src/jscanify.min.js"></script>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <!-- highlighted video -->
+    <script>
+        const scanner = new jscanify();
+        const canvas = document.getElementById("canvas");
+        const canvasCtx = canvas.getContext("2d");
+
+        navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+
+            const video = document.createElement('video');
+            video.srcObject = stream;
+            video.onloadedmetadata = () => {
+
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+
+                video.play();
+
+                setInterval(() => {
+                    // Draw the video frame on the canvas
+                    canvasCtx.drawImage(video, 0, 0);
+
+                    // Highlight the paper and draw it on the same canvas
+                    const resultCanvas = scanner.highlightPaper(canvas);
+                    canvasCtx.clearRect(0, 0, canvas.width, canvas.height);  // Clear the canvas
+                    canvasCtx.drawImage(resultCanvas, 0, 0);  // Draw the highlighted paper
+                }, 10);
+            };
+        });
+
+    </script>
+</body>
+</html>
