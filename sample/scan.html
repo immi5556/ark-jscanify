@@ -1,13 +1,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <title></title>
     <script src="https://docs.opencv.org/4.7.0/opencv.js" async></script>
     <!-- warning: loading OpenCV can take some time. Load asynchronously -->
     <script src="https://cdn.jsdelivr.net/gh/ColonelParrot/jscanify@master/src/jscanify.min.js"></script>
 </head>
+
 <body style="width:99%; height:99%; overflow: hidden;">
     <canvas id="canvas" style="overflow: hidden; width: 100%; height: 100%;"></canvas>
-    <button id="scan" style="position:fixed; left:0px; bottom: 5px; height:75px; width: 100%; overflow: hidden;">Scan</button>
+    <button id="scan"
+        style="position:fixed; left:0px; bottom: 5px; height:75px; width: 100%; overflow: hidden;">Scan</button>
     <!-- highlighted video -->
     <script>
         const scanner = new jscanify();
@@ -58,4 +61,5 @@
 
     </script>
 </body>
+
 </html>
